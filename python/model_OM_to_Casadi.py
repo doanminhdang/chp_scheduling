@@ -13,20 +13,22 @@ equation_file = 'equations_KWKK_V49.txt'
 with open(equation_file,'wt') as file:
   [file.write(listtext[linenum-1].lstrip(' ')) for linenum in intlines]
 
-# Remove trailing '_' in the names from Open Modelica variables
-OM_var_name='list_OM_var_name.csv'
-with open(OM_var_name,'rt') as file:
-  vars_OM=file.read().splitlines()
+# Read lists of OM and Casadi variable names from the Excel file
+import pandas
+df = pandas.read_excel('interchange/name_conversion_OM_Casadi.xls', dtype=str)
+vars_OM=df['OM_names'].values
+vars_Casadi=df['Casadi_names'].values
+# Remove trailing '_' and spaces in the names from Open Modelica variables
+vars_OM_nospace = [varname.rstrip(' ') for varname in vars_OM]
+vars_OM_new = [varname.rstrip('_') for varname in vars_OM_nospace]
 
-vars_OM_new = [varname.rstrip('_') for varname in vars_OM]
-new_OM_file = 'list_OM_var_name_notrailing.csv'
-with open(new_OM_file,'wt') as file:
+# Write the list of OM and Casadi variable names to CSV files
+new_OM_var_file = 'list_OM_var_name.csv'
+with open(new_OM_var_file,'wt') as file:
   file.write("\n".join(vars_OM_new))
-
-# Read list of Casadi variable names
-Casadi_var_name='list_Casadi_var_name.csv'
-with open(Casadi_var_name,'rt') as file:
-  vars_Casadi=file.read().splitlines()
+new_Casadi_var_file = 'list_Casadi_var_name.csv'
+with open(new_Casadi_var_file,'wt') as file:
+  file.write("\n".join(vars_Casadi))
 
 # Replace Open Modelica variable names with Casadi variable names
 with open(equation_file,'rt') as file:

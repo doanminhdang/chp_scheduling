@@ -23,7 +23,7 @@ class KWKK_CCHP_V49.SimModels.KWKK_LOOP
   Real CHP.CHP_H_W_MF_M(quantity = "MassFlowRate", unit = "kg/s") "Water mass flow out of the CHP [kg/s]";
   Real CHP.CHP_H_W_MF_M_Set(quantity = "MassFlowRate", unit = "kg/s");
   Real CHP.CHP_H_W_PT_M(unit = "kW") "Real thermal power produced by CHP [kW]";
-  Real CHP.CHP_H_W_PE_M(unit = "kW") "Real electrical power produced by CHP [kW]";
+  Real CHP.CHP_H_E_PE_M(unit = "kW") "Real electrical power produced by CHP [kW]";
   Real CHP.Pth_CHP(unit = "kW") "Power Calculation Variable [kW]";
   Real CHP.CHP_H_F_VF_M(unit = "l/h") "Fuel consumption of the CHP [l/h]";
   Real CHP.CHP_H_W_VF_M(unit = "m3/h") "Water volume Flow Rate [m3/h]";
@@ -1301,11 +1301,11 @@ equation
   CHP.CHP_ON_int = if CHP.heat then CHP.CHP_ON else 0.0;
   CHP.PartLoad_Ratio = 0.935962276499541 + 0.00389339241401334 * CHP.CHP_H_W_T_M_RL + -5.18855946923975e-05 * CHP.CHP_H_W_T_M_RL ^ 2.0;
   CHP.Pth_CHP = CHP.PartLoad_Ratio * CHP.Pth_CHP_Nominal;
-  CHP.CHP_H_W_PE_M = CHP.CHP_ON_int * CHP.Pel_CHP_Nominal "assuming electrical output is always constant";
+  CHP.CHP_H_E_PE_M = CHP.CHP_ON_int * CHP.Pel_CHP_Nominal "assuming electrical output is always constant";
   560.794 * der(CHP.CHP_H_W_PT_M) + CHP.CHP_H_W_PT_M = CHP.Pth_CHP * CHP.CHP_ON_int " T*der(y) + y = K*u";
   CHP.CHP_H_W_VF_M = 0.433352645 + -0.01514531 * CHP.CHP_H_W_T_M_RL + 0.00024329 * CHP.CHP_H_W_T_M_RL ^ 2.0;
   CHP.CHP_H_W_T_M_FL_K = CHP.CHP_H_W_T_M_RL_K + 0.2392344497607656 * CHP.CHP_H_W_PT_M / CHP.CHP_H_W_MF_M_Set;
-  CHP.CHP_H_F_VF_M = 1000.0 * (CHP.CHP_H_W_PE_M + CHP.CHP_H_W_PT_M) / (853.5 * (CHP.CHP_eta_Thermal + CHP.CHP_eta_Electrical) * CHP.CHP_Fuel_HHV) "[kW] * 1000 / [(kWh/kg) *(kg/m³)] = (l/h) ";
+  CHP.CHP_H_F_VF_M = 1000.0 * (CHP.CHP_H_E_PE_M + CHP.CHP_H_W_PT_M) / (853.5 * (CHP.CHP_eta_Thermal + CHP.CHP_eta_Electrical) * CHP.CHP_Fuel_HHV) "[kW] * 1000 / [(kWh/kg) *(kg/m³)] = (l/h) ";
   Load.m_dot_LOAD = 0.2761951388888889 * Load.LOAD_HC_W_VF_M___;
   Load.m_dot_CC = 0.2761951388888889 * Load.v_dot_CC;
   Load.LOAD_HC_W_T_M__FL_ = Load.LOAD_In.T;
