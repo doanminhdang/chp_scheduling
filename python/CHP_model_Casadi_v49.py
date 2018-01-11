@@ -6,7 +6,7 @@
 import pylab as pl
 import casadi as ca
 import numpy as np
-print ca.__version__
+print(ca.__version__)
 
 
 # In[2]:

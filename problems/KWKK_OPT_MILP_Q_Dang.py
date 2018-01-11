@@ -11,7 +11,7 @@ import casadi as ca
 from matplotlib import pyplot as plt
 df = pandas.read_excel('winter_load_data.xlsx')
 #print the column names
-print df.columns
+print(df.columns)
 ##get the values for a given column
 Pth_Load_Heat = df['Pth_Load_Heat'].values
 Time = df['Time'].values
@@ -192,9 +192,9 @@ opts = {}
 #initiate one of the solvers
 #solver = ca.nlpsol("solver", "ipopt", lp, opts)
 #solver = ca.qpsol("solver", "qpoases", lp, {"discrete": discrete})
-solver = ca.nlpsol("solver", "bonmin", lp ,{"discrete": discrete})
+#solver = ca.nlpsol("solver", "bonmin", lp ,{"discrete": discrete})
 #solver = ca.nlpsol("solver", "bonmin", lp)
-#solver = ca.nlpsol("solver", "knitro", lp)
+solver = ca.nlpsol("solver", "knitro", lp, {"discrete": discrete})
 #solver = ca.conic("solver", "clp", lp)
 
 
@@ -340,8 +340,8 @@ def plot_sol(w_opt):
 plot_sol(V_opt)
 plt.show()
 
-print "Mininmal cost:" + str(K_opt)
-print " Optimal matrix:" + str(V_opt)
+print("Mininmal cost:" + str(K_opt))
+print("Optimal matrix:" + str(V_opt))
 
 ##notify to message --- This section is used just as test of other services, not for optimization
 #import requests
