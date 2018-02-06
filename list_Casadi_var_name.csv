@@ -12,22 +12,27 @@ T_AdCM_LT_FL
 T_CTES_t
 Pth_AdCM_MT
 v_dot_AdCM_MT
+(T_AdCM_MT_FL+273.15)
 T_AdCM_MT_FL
 (T_AdCM_MT_RL+273.15)
 T_AdCM_MT_RL
 Pth_AdCM_HT
 v_dot_AdCM_HT
+(T_HTES_t+273.15)
+T_HTES_t
 (T_AdCM_HT_FL+273.15)
 T_AdCM_HT_FL
 Pel_AdCM
 AdCM_Switch
 Pth_HP_MT
-v_dot_HP_MT
+v_dot_HP_MT_Set
 (T_HP_MT_FL+273.15)
+T_HP_MT_FL
 (T_HP_MT_RL+273.15)
 T_HP_MT_RL
 Pth_HP_HT
-v_dot_HP_HT
+v_dot_HP_HT_FL_Set
+(T_HP_HT_FL+273.15)
 T_HP_HT_FL
 (T_HP_HT_RL+273.15)
 T_HP_HT_RL
@@ -37,7 +42,9 @@ m_dot_HP_HT_FL_Set
 m_dot_HP_MT_FL_Set
 Pth_CCM_LT
 v_dot_CCM_LT
-(T_CCM_LT_FL+273.15)
+(T_CTES_t +273.15)
+T_CTES_t
+T_CCM_LT_FL + 273.15
 T_CCM_LT_FL
 Pth_CCM_MT
 v_dot_CCM_MT
@@ -57,10 +64,10 @@ v_dot_OC2
 (v_dot_OC2*rho_water/3600)
 T_OC1_RL
 T_OC2_RL
-T_CCM_MT_RL
+T_CCM_MT_FL
 T_OC1_FL
 T_OC2_FL
-T_CCM_MT_FL
+T_CCM_MT_RL
 Pel_OC1
 Pel_OC2
 Pel_OC3
@@ -88,3 +95,4 @@ T_LOAD_C_CC_FL
 (T_LOAD_C_CC_RL+273.15)
 T_LOAD_C_CC_RL
 Pth_LOAD_H
+Pth_LOAD_C

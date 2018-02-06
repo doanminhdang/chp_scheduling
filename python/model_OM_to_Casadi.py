@@ -1,3 +1,7 @@
+# This script export the model with names choosen for Python
+# Instruction: run in the parent directory:
+#   python3 python/model_OM_to_Casadi.py
+
 # Collect the equations from the initiated model
 OM_model='KWKK_model_V49_instantiate.txt'
 with open(OM_model,'rt') as file:
@@ -15,7 +19,7 @@ with open(equation_file,'wt') as file:
 
 # Read lists of OM and Casadi variable names from the Excel file
 import pandas
-df = pandas.read_excel('interchange/name_conversion_OM_Casadi.xls', dtype=str)
+df = pandas.read_excel('interchange/name_conversion_OM_Casadi.xls')
 vars_OM=df['OM_names'].values
 vars_Casadi=df['Casadi_names'].values
 # Remove trailing '_' and spaces in the names from Open Modelica variables
