@@ -1,6 +1,6 @@
 560.794 * der(Pth_CHP) + Pth_CHP = Pth_CHP * CHP_ON_int 
 v_dot_CHP = 0.433352645 + -0.01514531 * T_HTES_b + 0.00024329 * T_HTES_b ** 2.0
-CHP_H_W_T_M_FL_K = (T_HTES_b+273.15) + 0.2392344497607656 * Pth_CHP / m_dot_CHP_set
+(T_CHP_FL+273.15) = (T_HTES_b+273.15) + 0.2392344497607656 * Pth_CHP / m_dot_CHP_set
 v_dot_FUEL = 1000.0 * (Pel_CHP + Pth_CHP) / (853.5 * (CHP_eta_Thermal + CHP_eta_Electrical) * CHP_Fuel_HHV) 
 Pth_LOAD_H = 4.18 * m_dot_CC_H * (T_LOAD_H_CC_FL - T_LOAD_H_CC_RL)
 Pth_LOAD_H = 4.18 * (v_dot_LOAD_H*rho_water/3600) * ((T_LOAD_H_FL+273.15) - (T_LOAD_H_CC_RL+273.15))
